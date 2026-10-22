@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typo Check for Word</title>
+<style>
+:root { --bg: #f6f8f6; --surface: #ffffff; --fg: #18211b; --muted: #59645c; --line: #dfe5e0; --accent: #15803d; }
+@media (prefers-color-scheme: dark) { :root { --bg: #111613; --surface: #18201b; --fg: #e6ece7; --muted: #9aa69d; --line: #2b352f; --accent: #3fb36a; color-scheme: dark } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; padding: 40px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); }
+main { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1 { margin: 0; font-size: 32px; line-height: 1.2; display: flex; align-items: center; gap: 12px; }
+h1 img { width: 40px; height: 40px; }
+h2 { margin: 0 0 8px; font-size: 18px; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+a { color: var(--accent); }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+code { font: 13px Consolas, ui-monospace, monospace; }
+ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.wrap { overflow-x: auto; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1><img src="icon-80.png" alt="">Typo Check for Word</h1>
+    <p class="muted" style="margin-top:10px">A Microsoft Word add-in that flags typos, grammar slips, banned words and style patterns in the open document. All checking runs inside the browser.</p>
+  </header>
+
+  <section class="box">
+    <h2>For IT review</h2>
+    <ul>
+      <li>Source files: <a href="https://github.com/esthergonswork/TypoCheck">github.com/esthergonswork/TypoCheck</a></li>
+      <li>Manifest: <a href="manifest.xml">manifest.xml</a></li>
+      <li>Permission requested: <code>ReadWriteDocument</code>, so fixes can be applied to the open document.</li>
+      <li>External scripts: Microsoft's own <code>office.js</code> from appsforoffice.microsoft.com. Nothing else.</li>
+      <li>Network calls: none. The dictionary is built into <code>taskpane.html</code> and no document text leaves the browser.</li>
+      <li>Storage: the user's word lists and settings in the browser's local storage.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Files</h2>
+    <div class="wrap">
+      <table>
+        <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>manifest.xml</code></td><td>Add-in manifest. Adds a Typo Check button to Word's Home tab.</td></tr>
+          <tr><td><code>taskpane.html</code></td><td>The checker panel: interface, checking engine and compressed UK/US dictionary.</td></tr>
+          <tr><td><code>commands.html</code></td><td>Required by the ribbon button. Loads office.js only.</td></tr>
+          <tr><td><code>icon-*.png</code></td><td>Ribbon and store icons.</td></tr>
+          <tr><td><code>index.html</code></td><td>This page.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Deployment</h2>
+    <p>Microsoft 365 admin center › Settings › Integrated apps › Upload custom apps › Office Add-in. Upload <code>manifest.xml</code> and assign it to the requesting users.</p>
+  </section>
+</main>
+</body>
+</html>
